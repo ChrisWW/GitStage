@@ -1,0 +1,68 @@
+package com.example.gitstage.network
+
+
+import android.util.Log
+import com.example.gitstage.RepositoryResponseItem
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.http.GET
+
+
+// idk livedata, oddzielne repo dla bazy danych, LiveData<List<Repozytorium>>
+// init repo...
+// call gives us enqueue() puts on background thread - asynchronous messaging
+
+// retrofit requesty na backend, kominukacja z serwerem(backend) Client -> retrofit > serwer(backend)
+// Retrofit moze byc nullem
+
+//Log.d("TEST","TEST")
+
+class GitHubService {
+
+    val repoAPI = RetrofitClientInstance.retrofitInstance?.create(GitHubAPI::class.java)
+
+   fun fetchrepo(result: Callback2){
+
+      repoAPI?.fetchRepo()?.enqueue(object : Callback<ArrayList<RepositoryResponseItem>> {
+         /**
+          * Invoked for a received HTTP response.
+          *
+          *
+          * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
+          * Call [Response.isSuccessful] to determine if the response indicates success.
+          */
+         override fun onResponse(call: Call<ArrayList<RepositoryResponseItem>>, response: Response<ArrayList<RepositoryResponseItem>>) {
+
+
+             Log.d("TEST","response from back-end:${response.body()}")
+             response.body()?.let { result.repositoryResult(it) }
+
+         }
+
+         /**
+          * Invoked when a network exception occurred talking to the server or when an unexpected exception
+          * occurred creating the request or processing the response.
+          */
+         override fun onFailure(call: Call<ArrayList<RepositoryResponseItem>>, t: Throwable) {
+
+             Log.d("TEST","response from back-end:$t")
+
+         }
+
+      })
+
+
+   }
+
+
+
+}
+
+interface Callback2 {
+
+    fun repositoryResult(
+            result: ArrayList<RepositoryResponseItem>
+    )
+
+}
