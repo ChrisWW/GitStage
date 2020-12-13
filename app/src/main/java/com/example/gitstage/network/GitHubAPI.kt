@@ -5,8 +5,8 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface GitHubAPI {
-
-
     @GET("repositories")
-    fun fetchRepo() : Call<ArrayList<RepositoryResponseItem>>
+    fun fetchRepo(): Call<ArrayList<RepositoryResponseItem>>
+
 }
+
