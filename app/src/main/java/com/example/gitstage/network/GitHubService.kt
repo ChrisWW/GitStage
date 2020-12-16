@@ -1,6 +1,7 @@
 package com.example.gitstage.network
 
 
+import android.app.Application
 import android.util.Log
 import com.example.gitstage.Owner
 import com.example.gitstage.RepositoryResponseItem
@@ -19,7 +20,13 @@ import retrofit2.http.GET
 
 //Log.d("TEST","TEST")
 
+class Test{
+
+}
+
 class GitHubService {
+
+
 
     val repoAPI = RetrofitClientInstance.retrofitInstance?.create(GitHubAPI::class.java)
 

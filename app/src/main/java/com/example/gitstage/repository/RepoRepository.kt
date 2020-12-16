@@ -23,7 +23,6 @@ class RepoRepository(private val githubService : GitHubService) {
         }
 // https://api.github.com/repos/plotly/dash  brak stargazers_count
 
-
 }
 
 // zwraca liste z repository
